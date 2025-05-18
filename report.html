@@ -1,18 +1,111 @@
-
-<html>
-<head><title>Coffee Shop Debug</title></head>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Coffee Shop Report</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 2em;
+            background: #f9f9f9;
+            color: #222;
+        }
+        h1, h2 {
+            color: #4B3832;
+        }
+        table {
+            border-collapse: collapse;
+            width: 50%;
+            margin-bottom: 2em;
+            background: #fff;
+        }
+        th, td {
+            border: 1px solid #bfae9e;
+            padding: 8px 12px;
+            text-align: left;
+        }
+        th {
+            background: #d9cfc1;
+        }
+        ul {
+            background: #fff;
+            padding: 1em;
+            border-radius: 6px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+            width: 50%;
+        }
+    </style>
+</head>
 <body>
-<h1>Customer & Order Summary</h1>
-<ul>
-    <li>Alice ordered ['Espresso', 'Latte']</li>
-    <li>Bob ordered ['Latte']</li>
-</ul>
+    <h1>Coffee Shop Customer & Order Summary</h1>
 
-<h2>Latte Stats</h2>
-<ul>
-    <li>Number of Orders: 2</li>
-    <li>Average Price: 5.25</li>
-    <li>Customers: ['Alice', 'Bob']</li>
-</ul>
+    <!-- Add Customer/Order Form -->
+    <form id="addCustomerForm" style="margin-bottom:2em; background:#fff; padding:1em; border-radius:6px; width:50%;">
+        <h2>Add Customer & Order</h2>
+        <label>
+            Customer Name:
+            <input type="text" id="customerName" required>
+        </label>
+        <br><br>
+        <label>
+            Orders (comma separated):
+            <input type="text" id="customerOrders" required>
+        </label>
+        <br><br>
+        <button type="submit">Add</button>
+    </form>
+
+    <table id="customerTable">
+        <thead>
+            <tr>
+                <th>Customer</th>
+                <th>Orders</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>Alice</td>
+                <td>Espresso, Latte</td>
+            </tr>
+            <tr>
+                <td>Bob</td>
+                <td>Latte</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <h2>Latte Stats</h2>
+    <table>
+        <tr>
+            <th>Number of Orders</th>
+            <td>2</td>
+        </tr>
+        <tr>
+            <th>Average Price</th>
+            <td>$5.25</td>
+        </tr>
+        <tr>
+            <th>Customers</th>
+            <td>Alice, Bob</td>
+        </tr>
+    </table>
+
+    <script>
+        // Simple JS to add a customer/order to the table
+        document.getElementById('addCustomerForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const name = document.getElementById('customerName').value.trim();
+            const orders = document.getElementById('customerOrders').value.trim();
+            if (name && orders) {
+                const tbody = document.getElementById('customerTable').querySelector('tbody');
+                const row = document.createElement('tr');
+                row.innerHTML = `<td>${name}</td><td>${orders}</td>`;
+                tbody.appendChild(row);
+                // Optionally, clear the form
+                document.getElementById('customerName').value = '';
+                document.getElementById('customerOrders').value = '';
+            }
+        });
+    </script>
 </body>
 </html>
